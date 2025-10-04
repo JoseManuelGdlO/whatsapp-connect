@@ -1,0 +1,85 @@
+/* Simplified styles without Angular Material theming */
+
+html, body { 
+  height: 100%; 
+  margin: 0; 
+  padding: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+// Custom scrollbar
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+// Status colors
+.status-connected {
+  color: #4caf50 !important;
+}
+
+.status-disconnected {
+  color: #f44336 !important;
+}
+
+.status-waiting {
+  color: #ff9800 !important;
+}
+
+// Loading states
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .main-content {
+    padding: 10px !important;
+  }
+  
+  .card-container {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .button-row {
+    flex-direction: column !important;
+  }
+  
+  .session-item {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+  
+  .session-actions {
+    margin-top: 10px;
+  }
+}

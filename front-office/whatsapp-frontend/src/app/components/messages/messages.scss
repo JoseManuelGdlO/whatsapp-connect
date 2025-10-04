@@ -1,0 +1,52 @@
+.messages-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.messages-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.messages-header h1 {
+  margin: 0 0 0 16px;
+}
+
+.send-message-container,
+.messages-history-container {
+  margin-top: 20px;
+}
+
+.no-messages {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+.no-messages mat-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 16px;
+  color: #ccc;
+}
+
+mat-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+mat-card-header mat-card-title {
+  margin: 0;
+}
+
+mat-tab-group {
+  margin-top: 20px;
+}
+
+mat-tab-group ::ng-deep .mat-mdc-tab-body-wrapper {
+  padding-top: 20px;
+}

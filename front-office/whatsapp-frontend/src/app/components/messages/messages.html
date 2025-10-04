@@ -1,0 +1,79 @@
+<div class="messages-container">
+  <div class="messages-header">
+    <button mat-icon-button (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1>Messages - {{ sessionId }}</h1>
+  </div>
+
+  <mat-tab-group>
+    <!-- Send Message Tab -->
+    <mat-tab label="Send Message">
+      <div class="send-message-container">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Send New Message</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="form-container">
+              <mat-form-field class="full-width">
+                <mat-label>Phone Number</mat-label>
+                <input matInput [(ngModel)]="newMessage.phone" placeholder="5511999999999">
+                <mat-hint>Include country code (e.g., 5511999999999)</mat-hint>
+              </mat-form-field>
+              
+              <mat-form-field class="full-width">
+                <mat-label>Message</mat-label>
+                <textarea matInput [(ngModel)]="newMessage.message" rows="4" placeholder="Type your message here..."></textarea>
+              </mat-form-field>
+              
+              <div class="button-row">
+                <button mat-raised-button color="primary" (click)="sendMessage()" [disabled]="sending">
+                  <mat-icon>send</mat-icon>
+                  Send Message
+                </button>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-tab>
+
+    <!-- Messages History Tab -->
+    <mat-tab label="Message History">
+      <div class="messages-history-container">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>Recent Messages</mat-card-title>
+            <button mat-icon-button (click)="loadMessages()" [disabled]="loading">
+              <mat-icon>refresh</mat-icon>
+            </button>
+          </mat-card-header>
+          <mat-card-content>
+            <!-- Loading Spinner -->
+            <div *ngIf="loading" class="loading-spinner">
+              <mat-spinner></mat-spinner>
+            </div>
+
+            <!-- Messages List -->
+            <div *ngIf="!loading" class="message-container">
+              <div *ngIf="messages.length === 0" class="no-messages">
+                <mat-icon>message</mat-icon>
+                <p>No messages found for this session.</p>
+              </div>
+              
+              <div *ngFor="let message of messages" class="message-item" [ngClass]="message.fromMe ? 'from-me' : 'from-other'">
+                <div class="message-header">
+                  <span class="sender">{{ message.fromMe ? 'You' : formatPhone(message.from) }}</span>
+                  <span class="timestamp">{{ formatTimestamp(message.timestamp) }}</span>
+                </div>
+                <div class="message-body">{{ message.body }}</div>
+                <div class="message-time">{{ formatTimestamp(message.timestamp) }}</div>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

@@ -1,0 +1,84 @@
+<div class="dashboard-container">
+  <h1>WhatsApp API Dashboard</h1>
+  
+  <!-- Statistics Cards -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-number">{{ stats.totalSessions }}</div>
+      <div class="stat-label">Total Sessions</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">{{ stats.connectedSessions }}</div>
+      <div class="stat-label">Connected</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">{{ stats.disconnectedSessions }}</div>
+      <div class="stat-label">Disconnected</div>
+    </div>
+  </div>
+
+  <!-- Quick Actions -->
+  <mat-card class="action-card">
+    <mat-card-header>
+      <mat-card-title>Quick Actions</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="button-row">
+        <button mat-raised-button color="primary" routerLink="/sessions">
+          <mat-icon>phone</mat-icon>
+          Manage Sessions
+        </button>
+        <button mat-raised-button color="accent" (click)="restoreSessions()" [disabled]="loading">
+          <mat-icon>restore</mat-icon>
+          Restore Sessions
+        </button>
+        <button mat-raised-button (click)="loadSessions()" [disabled]="loading">
+          <mat-icon>refresh</mat-icon>
+          Refresh
+        </button>
+        <button mat-raised-button routerLink="/webhooks">
+          <mat-icon>webhook</mat-icon>
+          Manage Webhooks
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Loading Spinner -->
+  <div *ngIf="loading" class="loading-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <!-- Sessions Overview -->
+  <mat-card class="sessions-overview">
+    <mat-card-header>
+      <mat-card-title>Active Sessions</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div *ngIf="(sessions$ | async)?.length === 0" class="no-sessions">
+        <mat-icon>phone_disabled</mat-icon>
+        <p>No active sessions found. Create a new session to get started.</p>
+        <button mat-raised-button color="primary" routerLink="/sessions">
+          Create Session
+        </button>
+      </div>
+      
+      <div *ngFor="let session of sessions$ | async" class="session-item">
+        <div class="session-info">
+          <h3>{{ session.sessionId }}</h3>
+          <span class="status" [ngClass]="getStatusClass(session.status)">
+            {{ session.status }}
+          </span>
+        </div>
+        <div class="session-actions">
+          <button mat-icon-button [routerLink]="['/messages', session.sessionId]">
+            <mat-icon>message</mat-icon>
+          </button>
+          <button mat-icon-button [routerLink]="['/sessions']">
+            <mat-icon>settings</mat-icon>
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,122 @@
+/* You can add global styles to this file, and also import other style files */
+
+@use '@angular/material' as mat;
+
+// Include the common styles for Angular Material
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+$primary: mat.define-palette(mat.$indigo-palette);
+$accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object
+$theme: mat.define-light-theme((
+  color: (
+    primary: $primary,
+    accent: $accent,
+    warn: $warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app
+@include mat.all-component-themes($theme);
+
+// Global styles
+html, body { 
+  height: 100%; 
+  margin: 0; 
+  padding: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+// Custom scrollbar
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+// Material Design customizations
+.mat-mdc-card {
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+  border-radius: 8px !important;
+}
+
+.mat-mdc-raised-button {
+  border-radius: 6px !important;
+}
+
+.mat-mdc-form-field {
+  width: 100%;
+}
+
+// Status colors
+.status-connected {
+  color: #4caf50 !important;
+}
+
+.status-disconnected {
+  color: #f44336 !important;
+}
+
+.status-waiting {
+  color: #ff9800 !important;
+}
+
+// Loading states
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .main-content {
+    padding: 10px !important;
+  }
+  
+  .card-container {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .button-row {
+    flex-direction: column !important;
+  }
+  
+  .session-item {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+  
+  .session-actions {
+    margin-top: 10px;
+  }
+}

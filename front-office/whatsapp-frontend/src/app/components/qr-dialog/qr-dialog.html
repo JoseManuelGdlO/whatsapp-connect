@@ -1,0 +1,33 @@
+<div class="qr-dialog">
+  <h2 mat-dialog-title>WhatsApp QR Code</h2>
+  
+  <mat-dialog-content>
+    <div class="qr-container">
+      <img [src]="data.qrCode" alt="WhatsApp QR Code" class="qr-image">
+      <p class="instructions">
+        <strong>Instructions:</strong>
+      </p>
+      <ol>
+        <li>Open WhatsApp Business on your phone</li>
+        <li>Go to Settings > Linked Devices</li>
+        <li>Tap "Link a Device"</li>
+        <li>Scan this QR code</li>
+        <li>Confirm the connection</li>
+      </ol>
+      <p class="session-info">
+        <strong>Session ID:</strong> {{ data.sessionId }}
+      </p>
+    </div>
+  </mat-dialog-content>
+  
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="onRefresh()">
+      <mat-icon>refresh</mat-icon>
+      Refresh QR
+    </button>
+    <button mat-button (click)="onClose()">
+      <mat-icon>close</mat-icon>
+      Close
+    </button>
+  </mat-dialog-actions>
+</div>

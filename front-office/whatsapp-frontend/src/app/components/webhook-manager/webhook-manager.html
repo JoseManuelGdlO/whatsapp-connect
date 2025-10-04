@@ -1,0 +1,90 @@
+<div class="webhook-manager-container">
+  <h1>Webhook Management</h1>
+  
+  <mat-card class="info-card">
+    <mat-card-header>
+      <mat-card-title>About Webhooks</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Webhooks allow you to receive incoming WhatsApp messages in real-time. Configure a webhook URL for each session to automatically receive messages.</p>
+      <div class="webhook-info">
+        <h4>Webhook Payload Format:</h4>
+        <pre>{{ webhookExample }}</pre>
+        <button mat-button (click)="copyToClipboard(webhookExample)">
+          <mat-icon>content_copy</mat-icon>
+          Copy Example
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Loading Spinner -->
+  <div *ngIf="loading" class="loading-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <!-- Sessions with Webhook Configuration -->
+  <div *ngFor="let session of sessions$ | async" class="session-webhook-card">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ session.sessionId }}</mat-card-title>
+        <mat-card-subtitle>
+          Status: <span [ngClass]="getWebhookStatusClass(session.webhookUrl)">{{ getWebhookStatus(session.webhookUrl) }}</span>
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="webhook-config">
+          <mat-form-field class="full-width">
+            <mat-label>Webhook URL</mat-label>
+            <input matInput 
+                   [value]="session.webhookUrl || ''" 
+                   #webhookInput
+                   placeholder="https://your-server.com/webhook">
+            <mat-hint>Enter the URL where you want to receive incoming messages</mat-hint>
+          </mat-form-field>
+          
+          <div class="webhook-actions">
+            <button mat-raised-button 
+                    color="primary" 
+                    (click)="setWebhook(session.sessionId, webhookInput.value)"
+                    [disabled]="loading">
+              <mat-icon>save</mat-icon>
+              Save Webhook
+            </button>
+            
+            <button mat-button 
+                    (click)="testWebhook(session.sessionId, session.webhookUrl)"
+                    [disabled]="!session.webhookUrl || webhookTests[session.sessionId]">
+              <mat-icon>send</mat-icon>
+              Test Webhook
+            </button>
+            
+            <button mat-button 
+                    color="warn" 
+                    (click)="removeWebhook(session.sessionId)"
+                    [disabled]="!session.webhookUrl || loading">
+              <mat-icon>delete</mat-icon>
+              Remove
+            </button>
+          </div>
+        </div>
+        
+        <div *ngIf="session.webhookUrl" class="webhook-details">
+          <h4>Current Webhook:</h4>
+          <div class="webhook-url">
+            <code>{{ session.webhookUrl }}</code>
+            <button mat-icon-button (click)="copyToClipboard(session.webhookUrl)" matTooltip="Copy URL">
+              <mat-icon>content_copy</mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- No Sessions Message -->
+  <div *ngIf="(sessions$ | async)?.length === 0" class="no-sessions">
+    <mat-icon>phone_disabled</mat-icon>
+    <p>No sessions found. Create a session first to configure webhooks.</p>
+  </div>
+</div>

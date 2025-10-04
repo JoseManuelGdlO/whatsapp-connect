@@ -1,0 +1,41 @@
+{
+  "name": "wppconnect-api",
+  "version": "1.0.0",
+  "description": "WhatsApp API similar to UltraMSG using WPPConnect",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server-new.js",
+    "start:old": "node src/server.js",
+    "dev": "nodemon src/server-new.js",
+    "webhook": "node webhook-server.js",
+    "dev:webhook": "nodemon webhook-server.js",
+    "test": "node test-api.js",
+    "pm2:start": "pm2 start ecosystem.config.js",
+    "pm2:stop": "pm2 stop ecosystem.config.js",
+    "pm2:restart": "pm2 restart ecosystem.config.js"
+  },
+  "keywords": [
+    "whatsapp",
+    "api",
+    "wppconnect",
+    "ultramsg"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "whatsapp-web.js": "^1.23.0",
+    "axios": "^1.6.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "helmet": "^7.1.0",
+    "qrcode": "^1.5.3",
+    "socket.io": "^4.7.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

@@ -1,0 +1,117 @@
+.webhook-manager-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.info-card {
+  margin-bottom: 20px;
+}
+
+.webhook-info {
+  margin-top: 16px;
+  padding: 16px;
+  background: #f5f5f5;
+  border-radius: 8px;
+}
+
+.webhook-info h4 {
+  margin: 0 0 12px 0;
+  color: #333;
+}
+
+.webhook-info pre {
+  background: #fff;
+  padding: 12px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  font-size: 0.9em;
+  overflow-x: auto;
+  margin: 12px 0;
+}
+
+.session-webhook-card {
+  margin: 20px 0;
+}
+
+.webhook-config {
+  margin-bottom: 20px;
+}
+
+.webhook-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.webhook-details {
+  margin-top: 20px;
+  padding: 16px;
+  background: #e8f5e8;
+  border-radius: 8px;
+  border-left: 4px solid #4caf50;
+}
+
+.webhook-details h4 {
+  margin: 0 0 12px 0;
+  color: #2e7d32;
+}
+
+.webhook-url {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid #4caf50;
+}
+
+.webhook-url code {
+  flex: 1;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+  color: #2e7d32;
+  word-break: break-all;
+}
+
+.no-sessions {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+.no-sessions mat-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 16px;
+  color: #ccc;
+}
+
+.status-connected {
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.status-disconnected {
+  color: #f44336;
+  font-weight: bold;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .webhook-actions {
+    flex-direction: column;
+  }
+  
+  .webhook-url {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .webhook-url code {
+    margin-bottom: 8px;
+  }
+}

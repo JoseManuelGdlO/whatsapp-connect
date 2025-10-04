@@ -1,0 +1,87 @@
+<div class="sessions-container">
+  <h1>WhatsApp Sessions Management</h1>
+
+  <!-- Create New Session -->
+  <mat-card class="create-session-card">
+    <mat-card-header>
+      <mat-card-title>Create New Session</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="form-container">
+        <mat-form-field class="full-width">
+          <mat-label>Session ID</mat-label>
+          <input matInput [(ngModel)]="newSession.sessionId" placeholder="e.g., my-session">
+        </mat-form-field>
+        
+        <mat-form-field class="full-width">
+          <mat-label>Webhook URL (Optional)</mat-label>
+          <input matInput [(ngModel)]="newSession.webhookUrl" placeholder="https://your-server.com/webhook">
+        </mat-form-field>
+        
+        <div class="button-row">
+          <button mat-raised-button color="primary" (click)="createSession()" [disabled]="loading">
+            <mat-icon>add</mat-icon>
+            Create Session
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Loading Spinner -->
+  <div *ngIf="loading" class="loading-spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <!-- Sessions List -->
+  <mat-card class="sessions-list-card">
+    <mat-card-header>
+      <mat-card-title>Active Sessions</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div *ngIf="(sessions$ | async)?.length === 0" class="no-sessions">
+        <mat-icon>phone_disabled</mat-icon>
+        <p>No sessions found. Create a new session to get started.</p>
+      </div>
+      
+      <div *ngFor="let session of sessions$ | async" class="session-card">
+        <div class="session-header">
+          <div class="session-info">
+            <h3>{{ session.sessionId }}</h3>
+            <span class="status" [ngClass]="getStatusClass(session.status)">
+              {{ session.status }}
+            </span>
+          </div>
+          <div class="session-actions">
+            <button mat-icon-button (click)="getStatus(session.sessionId)" title="Check Status">
+              <mat-icon>info</mat-icon>
+            </button>
+            <button mat-icon-button (click)="showQRCode(session.sessionId)" title="Show QR Code">
+              <mat-icon>qr_code</mat-icon>
+            </button>
+            <button mat-icon-button [routerLink]="['/messages', session.sessionId]" title="View Messages">
+              <mat-icon>message</mat-icon>
+            </button>
+            <button mat-icon-button [routerLink]="['/webhooks']" title="Configure Webhook">
+              <mat-icon>webhook</mat-icon>
+            </button>
+            <button mat-icon-button (click)="deleteSession(session.sessionId)" title="Delete Session" color="warn">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+        
+        <div class="session-details">
+          <div *ngIf="session.webhookUrl" class="webhook-info">
+            <mat-icon>webhook</mat-icon>
+            <span>Webhook: {{ session.webhookUrl }}</span>
+          </div>
+          <div *ngIf="session.lastUpdated" class="last-updated">
+            <mat-icon>schedule</mat-icon>
+            <span>Last updated: {{ session.lastUpdated | date:'short' }}</span>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

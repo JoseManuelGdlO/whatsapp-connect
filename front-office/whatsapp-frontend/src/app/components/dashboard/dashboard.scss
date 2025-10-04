@@ -1,0 +1,58 @@
+.dashboard-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.action-card {
+  margin: 20px 0;
+}
+
+.sessions-overview {
+  margin-top: 20px;
+}
+
+.no-sessions {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+.no-sessions mat-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 16px;
+  color: #ccc;
+}
+
+.session-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin: 8px 0;
+  background: #fafafa;
+}
+
+.session-info h3 {
+  margin: 0 0 8px 0;
+  color: #333;
+}
+
+.session-info .status {
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.9em;
+}
+
+.session-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.action-card mat-card-content {
+  padding-top: 16px;
+}
