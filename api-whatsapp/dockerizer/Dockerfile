@@ -5,13 +5,13 @@ FROM node:20
 WORKDIR /app/api-whatsapp
 
 # Copia package.json y package-lock.json
-COPY package*.json ./
+COPY api-whatsapp/package*.json ./
 
 # Instala dependencias
 RUN npm install
 
 # Copia el resto del código
-COPY . .
+COPY api-whatsapp/ .
 
 # Expone el puerto (por si lo necesitas)
 EXPOSE 3000
