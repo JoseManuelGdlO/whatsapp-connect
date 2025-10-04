@@ -1,6 +1,6 @@
 @echo off
 echo ========================================
-echo Restarting WhatsApp API with Cleanup Fix
+echo Restarting WhatsApp API (Cleaned Structure)
 echo ========================================
 echo.
 

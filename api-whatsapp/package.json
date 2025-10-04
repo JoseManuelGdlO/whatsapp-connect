@@ -4,9 +4,8 @@
   "description": "WhatsApp API similar to UltraMSG using WPPConnect",
   "main": "src/server.js",
   "scripts": {
-    "start": "node src/server-new.js",
-    "start:old": "node src/server.js",
-    "dev": "nodemon src/server-new.js",
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
     "webhook": "node webhook-server.js",
     "dev:webhook": "nodemon webhook-server.js",
     "test": "node test-api.js",
