@@ -1,20 +1,20 @@
-# Base image
+# Usa la imagen base de Node
 FROM node:20
 
-# Create app directory
+# Crea el directorio de trabajo
 WORKDIR /app/api-whatsapp
 
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-COPY api-whatsapp/package*.json ./
+# Copia package.json y package-lock.json
+COPY package*.json ./
 
-# Install app dependencies
+# Instala dependencias
 RUN npm install
 
-# Bundle app source
+# Copia el resto del código
 COPY . .
 
-# Start the server using the production build
-CMD [ "node", "src/server.js" ]
-
-# Exposing server port
+# Expone el puerto (por si lo necesitas)
 EXPOSE 3000
+
+# Comando por defecto
+CMD ["npm", "start"]
