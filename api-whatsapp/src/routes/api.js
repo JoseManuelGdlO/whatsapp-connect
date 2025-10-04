@@ -371,11 +371,15 @@ router.delete('/cleanup/:sessionId?', async (req, res) => {
       console.log('🧹 Cleaning up all sessions...');
       
       for (const [id, client] of sessionManager.whatsappInstances) {
-        try {
-          console.log(`🔌 Closing session: ${id}`);
-          await client.destroy();
-        } catch (error) {
-          console.error(`Error closing session ${id}:`, error.message);
+        if (client && typeof client.destroy === 'function') {
+          try {
+            console.log(`🔌 Closing session: ${id}`);
+            await client.destroy();
+          } catch (error) {
+            console.error(`Error closing session ${id}:`, error.message);
+          }
+        } else {
+          console.log(`⚠️ Client ${id} is null or doesn't have destroy method`);
         }
       }
       
@@ -410,11 +414,15 @@ router.delete('/cleanup/:sessionId?', async (req, res) => {
         });
       }
       
-      try {
-        console.log(`🔌 Closing session: ${sessionId}`);
-        await client.destroy();
-      } catch (error) {
-        console.error(`Error closing session ${sessionId}:`, error.message);
+      if (client && typeof client.destroy === 'function') {
+        try {
+          console.log(`🔌 Closing session: ${sessionId}`);
+          await client.destroy();
+        } catch (error) {
+          console.error(`Error closing session ${sessionId}:`, error.message);
+        }
+      } else {
+        console.log(`⚠️ Client ${sessionId} is null or doesn't have destroy method`);
       }
       
       sessionManager.whatsappInstances.delete(sessionId);

@@ -32,10 +32,18 @@ process.on('SIGINT', async () => {
   console.log('\n🛑 Received SIGINT, shutting down gracefully...');
   
   try {
-  // Close all WhatsApp clients
+    // Close all WhatsApp clients
     for (const [sessionId, client] of sessionManager.whatsappInstances) {
-      console.log(`🔌 Closing session: ${sessionId}`);
-      await client.destroy();
+      if (client && typeof client.destroy === 'function') {
+        try {
+          console.log(`🔌 Closing session: ${sessionId}`);
+          await client.destroy();
+        } catch (clientError) {
+          console.error(`❌ Error destroying client ${sessionId}:`, clientError.message);
+        }
+      } else {
+        console.log(`⚠️ Client ${sessionId} is null or doesn't have destroy method`);
+      }
     }
     
     console.log('✅ All sessions closed successfully');
@@ -52,8 +60,16 @@ process.on('SIGTERM', async () => {
   try {
     // Close all WhatsApp clients
     for (const [sessionId, client] of sessionManager.whatsappInstances) {
-        console.log(`🔌 Closing session: ${sessionId}`);
-        await client.destroy();
+      if (client && typeof client.destroy === 'function') {
+        try {
+          console.log(`🔌 Closing session: ${sessionId}`);
+          await client.destroy();
+        } catch (clientError) {
+          console.error(`❌ Error destroying client ${sessionId}:`, clientError.message);
+        }
+      } else {
+        console.log(`⚠️ Client ${sessionId} is null or doesn't have destroy method`);
+      }
     }
     
     console.log('✅ All sessions closed successfully');

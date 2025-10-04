@@ -57,14 +57,16 @@ class AutoRestoreService {
           
           // Clean up failed session
           const client = sessionManager.whatsappInstances.get(sessionId);
-          if (client) {
+          if (client && typeof client.destroy === 'function') {
             try {
               await client.destroy();
             } catch (destroyError) {
               console.error(`Error destroying failed client ${sessionId}:`, destroyError.message);
             }
-            sessionManager.whatsappInstances.delete(sessionId);
+          } else {
+            console.log(`⚠️ Client ${sessionId} is null or doesn't have destroy method`);
           }
+          sessionManager.whatsappInstances.delete(sessionId);
         }
       }
       
