@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y \
     procps \
     libxss1 \
     libnss3 \
+    libnss3-dev \
     libatk-bridge2.0-0 \
     libdrm2 \
     libxkbcommon0 \
@@ -19,6 +20,20 @@ RUN apt-get update && apt-get install -y \
     libpango-1.0-0 \
     libcairo2 \
     libatspi2.0-0 \
+    libgtk-3-0 \
+    libgconf-2-4 \
+    libx11-xcb1 \
+    libxcb-dri3-0 \
+    libxss1 \
+    libgconf-2-4 \
+    libxtst6 \
+    libxrandr2 \
+    libasound2 \
+    libpangocairo-1.0-0 \
+    libatk1.0-0 \
+    libcairo-gobject2 \
+    libgtk-3-0 \
+    libgdk-pixbuf2.0-0 \
     && rm -rf /var/lib/apt/lists/*
 
 # Set working directory

@@ -13,3 +13,8 @@ coverage
 logs
 tokens
 *.log
+.wwebjs_cache
+.wwebjs_auth
+sessions.json
+test-api.js
+restart-api.bat
