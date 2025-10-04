@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://your-api-domain.com'
+  apiUrl: 'https://bots-whatsapp-connect.vvggha.easypanel.host',
+  socketUrl: 'https://bots-whatsapp-connect-socket.vvggha.easypanel.host'
 };

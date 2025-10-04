@@ -1,8 +1,15 @@
 {
   "/api/*": {
-    "target": "http://localhost:3000",
-    "secure": false,
+    "target": "https://bots-whatsapp-connect.vvggha.easypanel.host",
+    "secure": true,
     "changeOrigin": true,
     "logLevel": "debug"
+  },
+  "/socket.io/*": {
+    "target": "https://bots-whatsapp-connect-socket.vvggha.easypanel.host",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "ws": true
   }
 }
