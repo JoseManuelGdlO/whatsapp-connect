@@ -5,7 +5,7 @@ FROM node:20
 WORKDIR /app/api-whatsapp
 
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
-COPY package*.json ./
+COPY api-whatsapp/package*.json ./
 
 # Install app dependencies
 RUN npm install
